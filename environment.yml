@@ -1,0 +1,7 @@
+name: SFHandle
+dependencies:
+  - numpy
+  - matplotlib
+  - scipy
+  - astropy
+  - pytest
