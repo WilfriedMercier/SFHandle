@@ -8,14 +8,24 @@ Test suite for the sfh.py module.
 '''
 import os
 import sys
+import pytest
 import astropy.table as     tab
 import numpy         as     np
-from   numpy.typing  import NDArray, ArrayLike
 
 sys.path.append(os.path.abspath('.'))
 
 import sfh
 import utilities
+
+# Setting up test data from the catalogue
+test_data = tab.Table.read('test/test.csv')
+test_sfhs = [
+    (
+        utilities.cigale_sfh(data), 
+        data['bayes.sfh.integrated']
+    )
+    for data in test_data
+]
 
 class Test_SFH:
     r'''
@@ -23,28 +33,14 @@ class Test_SFH:
 
     Test suite for the SFH class.
     '''
-
-    def load_test_data(self) -> tab.Table:
-        r'''Load a test data set.'''
-
-        return tab.Table.read('test/test.csv')
-
-    def load_sample(self) -> tuple[NDArray, NDArray, NDArray]:
-        r'''Load a single entry in the test data set.'''
-
-        data = self.load_test_data()
-        return utilities.cigale_sfh(data[0]) # pyright: ignore[reportArgumentType]
-        
-    ###########################################
-    #            Tests for methods            #
-    ###########################################
-
+    
     def test_constructor(self) -> None:
         r'''Test the creation of sfh data.'''
-
-        res = self.load_sample()
         
-        sfh.SFH(res[0], res[2], res[2])
+        # Select the SFH of the first element of the test data
+        data = test_sfhs[0][0]
+
+        sfh.SFH(data[0], data[1], data[2])
 
         assert True
 
@@ -63,9 +59,7 @@ class Test_SFH:
         assert np.all(res == [0, 1, 1])
 
     def test_interpolate_sfh(self) -> None:
-        r'''
-        Test the interpolation of a simple SFH using the default parameters.
-        '''
+        r'''Test the interpolation of a simple SFH using the default parameters.'''
 
         mysfh = sfh.SFH([0, 1], [1, 2], [2, 3])
         res   = mysfh.interpolate_sfh([0, 0.5, 1, 1.5])
@@ -76,9 +70,7 @@ class Test_SFH:
                )
 
     def test_interpolate_sfh_with_nan(self) -> None:
-        r'''
-        Test the interpolation of a simple SFH asking to extrapolate to NaN.
-        '''
+        r'''Test the interpolation of a simple SFH asking to extrapolate to NaN.'''
 
         mysfh = sfh.SFH([0, 1], [1, 2], [2, 3])
         res   = mysfh.interpolate_sfh(
@@ -87,3 +79,26 @@ class Test_SFH:
         )
 
         assert np.all(np.isnan([res[0][-1], res[1][-1]]))
+
+    def test_integral_from_manual(self):
+        r'''Test the integrated SFH using a manually made SFH.'''
+
+        mysfh = sfh.SFH(
+            [0, 1, 10], 
+            [1, 2, 3], 
+            [2, 3, 4]
+        )
+
+        assert mysfh.integral == (3*9 + 2) * 1e6
+
+    @pytest.mark.parametrize('data, integrated', test_sfhs)
+    def test_integral_from_catalogue(self, data, integrated):
+        r'''
+        Test the integrated SFH using entries from the test catalogue.
+
+        We require the precision on the integral to be below 2%.
+        '''
+        
+        mysfh = sfh.SFH(data[0], data[1], data[2])
+
+        assert np.abs(mysfh.integral / integrated - 1) < 0.02
