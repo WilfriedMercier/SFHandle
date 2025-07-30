@@ -80,7 +80,19 @@ class Test_SFH:
 
         assert np.all(np.isnan([res[0][-1], res[1][-1]]))
 
-    def test_integral_from_manual(self):
+    def test_interp_lb_time(self) -> None:
+
+        mysfh = sfh.SFH(
+            [0, 1, 10], 
+            [1, 2, 3], 
+            [2, 3, 4]
+        )
+
+        mysfh.interpolate_sfh((x := [0, 0.5, 1, 5, 10, 12]))
+        
+        assert np.all(mysfh.interp_lb_time == np.array(x))
+
+    def test_integral_from_manual(self) -> None:
         r'''Test the integrated SFH using a manually made SFH.'''
 
         mysfh = sfh.SFH(
@@ -92,7 +104,7 @@ class Test_SFH:
         assert mysfh.integral == (3*9 + 2) * 1e6
 
     @pytest.mark.parametrize('data, integrated', test_sfhs)
-    def test_integral_from_catalogue(self, data, integrated):
+    def test_integral_from_catalogue(self, data, integrated) -> None:
         r'''
         Test the integrated SFH using entries from the test catalogue.
 
