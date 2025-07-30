@@ -92,6 +92,10 @@ class Test_SFH:
         
         assert np.all(mysfh.interp_lb_time == np.array(x))
 
+    #########################################
+    #        Testing integral of SFH        #
+    #########################################
+
     def test_integral_from_manual(self) -> None:
         r'''Test the integrated SFH using a manually made SFH.'''
 
@@ -114,3 +118,43 @@ class Test_SFH:
         mysfh = sfh.SFH(data[0], data[1], data[2])
 
         assert np.abs(mysfh.integral / integrated - 1) < 0.02
+
+    ###################################################################
+    #        Testing the integration of the SFH at any lb time        #
+    ###################################################################
+
+    def test_integrated_sfh_at_0(self) -> None:
+        r'''Test the integration method when integrated throughout the entire star formation history.'''
+
+        mysfh = sfh.SFH(
+            [0, 1, 10], 
+            [1, 2, 3], 
+            [2, 3, 4]
+        )
+
+        assert mysfh.integrated_sfh_at(0.0) == mysfh.integral
+
+    def test_integrated_sfh_at_before_birth(self) -> None:
+        r'''Test the integration method when integrated before the galaxy was even born.'''
+
+        mysfh = sfh.SFH(
+            [0, 1, 10], 
+            [1, 2, 3], 
+            [2, 3, 4]
+        )
+
+        assert mysfh.integrated_sfh_at(10.1) == 0.0
+
+    def test_integrated_sfh_at_increasing(self) -> None:
+        r'''Test the integration method at different look-back times and verify that the mass increases with younger times.'''
+
+        mysfh = sfh.SFH(
+            [0, 1, 10], 
+            [1, 2, 3], 
+            [2, 3, 4]
+        )
+
+        lb_times    = [0, 0.5, 1, 2, 4, 6, 8, 10]
+        integration = np.array([mysfh.integrated_sfh_at(lb) for lb in lb_times])
+
+        assert np.all(integration[:-1] > integration[1:])

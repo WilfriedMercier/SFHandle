@@ -128,6 +128,23 @@ class SFH:
         )
 
         return self.interp_sfh, self.interp_err # pyright: ignore[reportReturnType]
+    
+    def integrated_sfh_at(self, lb_time: float) -> float:
+
+        # Mask that selects time bins older than the look-back time
+        mask  = self.lb_time >= lb_time
+
+        # If the look-back time is older than the galaxy, the mass is 0
+        if not np.any(mask): return 0.0
+
+        # Duration of each bin in Myr
+        tstep = self.lb_time[mask][1:] - self.lb_time[mask][:-1]
+
+        # If the look-back time value falls in between two bin edges,
+        # We need to compute the mass generated during that event
+        tstep = np.append(self.lb_time[mask][0] - lb_time, tstep)
+        
+        return np.nansum(self.sfh[mask] * tstep) * 1e6
 
     @classmethod
     def _interpolate(cls,
