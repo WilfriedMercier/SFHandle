@@ -12,7 +12,7 @@ import matplotlib.pyplot as plt
 # Local imports
 from .sfh import SFH
 
-def plot_sfh(sfh : SFH) -> None:
+def plot_sfh(sfh : SFH) -> None: # pragma: no cover
     r'''
     Plot a SFH and its interpolated form if available.
 
