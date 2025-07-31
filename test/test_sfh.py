@@ -6,16 +6,13 @@ r'''
 
 Test suite for the sfh.py module.
 '''
-import os
-import sys
 import pytest
 import astropy.table as     tab
 import numpy         as     np
 
-sys.path.append(os.path.abspath('.'))
-
-import sfh
-import utilities
+# Pytest loads the top directory as package thanks to the empty __init__ file. Imports are ok for testing.
+from SFHandle import sfh # pyright: ignore[reportMissingImports]
+from SFHandle import utilities # pyright: ignore[reportMissingImports]
 
 # Setting up test data from the catalogue
 test_data = tab.Table.read('test/test.csv')

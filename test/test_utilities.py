@@ -8,13 +8,9 @@ Test suite for the utilities.py module.
 '''
 
 import astropy.table as tab
-import os
-import sys
 
-sys.path.append(os.path.abspath('.'))
-
-# Local imports
-import utilities
+# Pytest loads the top directory as package thanks to the empty __init__ file. Imports are ok for testing.
+from SFHandle import utilities # pyright: ignore[reportMissingImports]
 
 class Test_cigale_sfh:
     r'''
