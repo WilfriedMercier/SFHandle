@@ -17,14 +17,14 @@ class SFH:
     r'''
     .. codeauthor:: Wilfried Mercier - LAM <wilfried.mercier@lam.fr>
 
-    Class representing a SFH.
+    Class representing a SFH from Cigale.
 
-    :param lb_time: time steps in look-back time for the SFH
-    :type lb_time: numpy.ndarray
-    :param sfh: amplitude of the SFH (Msun/yr) at each time step
-    :type lb_timsfh: numpy.ndarray
-    :param err: error on the amplitude of the SFH (Msun/yr) at each time step
-    :type err: numpy.ndarray
+    :param lb_time: Look-back time steps in :math:`{\rm Myr}` for the SFH.
+    :type lb_time: `ArrayLike`_
+    :param sfh: Amplitude of the SFH at each time step in :math:`{\rm M}_\odot~{\rm yr}^{-1}`.
+    :type sfh: `ArrayLike`_
+    :param err: Error on the amplitude of the SFH at each time step :math:`{\rm M}_\odot~{\rm yr}^{-1}`.
+    :type err: `ArrayLike`_
     '''
 
     def __init__(
@@ -34,9 +34,13 @@ class SFH:
         err     : ArrayLike
     ) -> None:
 
-        # Default values for the SFH
+        #: Look-back time steps in :math:`{\rm Myr}` for the SFH
         self.lb_time = np.array(lb_time)
+
+        #: Amplitude of the SFH at each time step in :math:`{\rm M}_\odot~{\rm yr}^{-1}`
         self.sfh     = np.array(sfh)
+
+        #: Error on the amplitude of the SFH at each time step in :math:`{\rm M}_\odot~{\rm yr}^{-1}`
         self.err     = np.array(err)
 
         # Interpolated values. They are set to an array when interpolate_sfh is called.
@@ -52,25 +56,25 @@ class SFH:
     
     @property
     def interp_lb_time(self) -> NDArray | None: 
-        r'''High-resolution time array used for SFH interpolation.'''
+        r'''High-resolution time array in :math:`{\rm Myr}` used for SFH interpolation.'''
         
         return self._interp_lb_time
     
     @property
     def interp_sfh(self) -> NDArray | None: 
-        r'''Interpolated SFH to high-resolution time array.'''
+        r'''High-resolution interpolated SFH in :math:`{\rm M}_\odot~{\rm yr}^{-1}`.'''
         
         return self._interp_sfh
 
     @property
     def interp_err(self) -> NDArray | None: 
-        r'''Interpolated error on the SFH amplitude to high-resolution time array.'''
+        r'''High-resolution interpolated error on the SFH amplitude :math:`{\rm M}_\odot~{\rm yr}^{-1}`.'''
         
         return self._interp_err
 
     @property
     def integral(self) -> ctypes.Numpy_float: 
-        r'''Integral of the SFH in Msun'''
+        r'''Integral of the SFH in :math:`{\rm M}_\odot`.'''
         
         # Duration of each bin in Myr
         tstep = (self.lb_time[::-1][:-1] - self.lb_time[::-1][1:])
@@ -91,19 +95,21 @@ class SFH:
         r'''
         Interpolate the SFH and its uncertainty on a new look-back time grid.
         
-        .. important:
+        .. important::
 
-            By default ``kind`` is equal to ``"next"``. This is the correct interpolation type for non-parametric SFHs. Change this parameter only if you know what you are doing.
+            By default ``kind`` is equal to :python:`'next'`. This is the correct interpolation type for non-parametric SFHs. Change this parameter only if you know what you are doing.
 
-        :param lb_time: high-resolution look-back time array
-        :type lb_time: numpy.ndarray or similar
-        :param kind: type of interpolation
-        :type kind: :py:class:`custom_types.Interp_kind`
-        :param bool bounds_error: whether to throw an error if extrapolating or not
-        :param float fill_value: value to use when extrapolating
+            For details regarding the parameters used for the interpolation, see `interp1d`_.
 
-        :returns: interpolated SFH and interpolated error on SFH amplitude
-        :rtype: (numpy.ndarray, numpy.ndarray)
+        :param lb_time: Look-back time array in :math:`{\rm Myr}` onto which the SFH must be interpolated.
+        :type lb_time: `ArrayLike`_
+        :param kind: Type of interpolation.
+        :type kind: :python:class:`custom_types.Interp_kind`
+        :param bool bounds_error: Whether to throw an error if extrapolating or not.
+        :param float fill_value: Value used for extrapolation.
+
+        :returns: Interpolated SFH and interpolated error on SFH amplitude. Both are in :math:`{\rm M}_\odot~{\rm yr}^{-1}`.
+        :rtype: (`NDArray`_, `NDArray`_)
         '''
 
         # Store the high-resolution range of look-back time
@@ -158,21 +164,18 @@ class SFH:
         
         .. note:
 
-            Interpolation is done on a function of the kind :math:`y = f(x)`
+            Interpolation is done on a function of the kind :math:`y = f(x)` using `interp1d`_.
 
-        :param new_x: new array used for interpolation
-        :type new_x: numpy.ndarray or similar
-        :param old_x: old x array defining the function
-        :type old_x: numpy.ndarray or similar
-        :param old_y: old y array defining the function
-        :type old_x: numpy.ndarray or similar
+        :param new_x: New array used for interpolation.
+        :type new_x: `ArrayLike`_
+        :param old_x: Old x array defining the function.
+        :type old_x: `ArrayLike`_
+        :param old_y: Old y array defining the function.
+        :type old_x: `ArrayLike`_
+        :param kwargs: Additional keyword arguments passed to `interp1d`_.
 
-        Keyword arguments
-        -----------------
-        :param kwargs: additional keywords that are passabled to :python:`scipy.interpolate.interp1d`
-
-        :returns: interpolated function on `new_x`
-        :rtype: numpy.ndarray
+        :returns: Interpolated function evaluated on `new_x`.
+        :rtype: `ArrayLike`_
         '''
 
         return interp1d(old_x, old_y, **kwargs)(new_x)
