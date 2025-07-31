@@ -49,6 +49,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@jupyter-widgets/html-manager@^1.0.1/dist/embed-amd.js"></script>
     <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'API/sfh';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -341,8 +342,96 @@
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section id="sfh-class">
-<h1>SFH class<a class="headerlink" href="#sfh-class" title="Link to this heading">#</a></h1>
+  <section id="module-SFHandle.sfh">
+<span id="sfh-class"></span><h1>SFH class<a class="headerlink" href="#module-SFHandle.sfh" title="Link to this heading">#</a></h1>
+<p><em>Code author: Wilfried Mercier - LAM &lt;<a class="reference external" href="mailto:wilfried&#46;mercier&#37;&#52;&#48;lam&#46;fr">wilfried<span>&#46;</span>mercier<span>&#64;</span>lam<span>&#46;</span>fr</a>&gt;</em></p>
+<p>Main part of the module that defines a SFH object to be manipulated.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="SFHandle.sfh.SFH">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">SFHandle.sfh.</span></span><span class="sig-name descname"><span class="pre">SFH</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">lb_time</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sfh</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">err</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/SFHandle/sfh.html#SFH"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#SFHandle.sfh.SFH" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p><em>Code author: Wilfried Mercier - LAM &lt;<a class="reference external" href="mailto:wilfried&#46;mercier&#37;&#52;&#48;lam&#46;fr">wilfried<span>&#46;</span>mercier<span>&#64;</span>lam<span>&#46;</span>fr</a>&gt;</em></p>
+<p>Class representing a SFH from Cigale.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>lb_time</strong> (<a class="reference external" href="https://numpy.org/devdocs/reference/typing.html#numpy.typing.ArrayLike">ArrayLike</a>) – Look-back time steps in <span class="math notranslate nohighlight">\({\rm Myr}\)</span> for the SFH.</p></li>
+<li><p><strong>sfh</strong> (<a class="reference external" href="https://numpy.org/devdocs/reference/typing.html#numpy.typing.ArrayLike">ArrayLike</a>) – Amplitude of the SFH at each time step in <span class="math notranslate nohighlight">\({\rm M}_\odot~{\rm yr}^{-1}\)</span>.</p></li>
+<li><p><strong>err</strong> (<a class="reference external" href="https://numpy.org/devdocs/reference/typing.html#numpy.typing.ArrayLike">ArrayLike</a>) – Error on the amplitude of the SFH at each time step <span class="math notranslate nohighlight">\({\rm M}_\odot~{\rm yr}^{-1}\)</span>.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="SFHandle.sfh.SFH.err">
+<span class="sig-name descname"><span class="pre">err</span></span><a class="headerlink" href="#SFHandle.sfh.SFH.err" title="Link to this definition">#</a></dt>
+<dd><p>Error on the amplitude of the SFH at each time step in <span class="math notranslate nohighlight">\({\rm M}_\odot~{\rm yr}^{-1}\)</span></p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="SFHandle.sfh.SFH.integral">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">integral</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">float16</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">float32</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">float64</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">longdouble</span></em><a class="headerlink" href="#SFHandle.sfh.SFH.integral" title="Link to this definition">#</a></dt>
+<dd><p>Integral of the SFH in <span class="math notranslate nohighlight">\({\rm M}_\odot\)</span>.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="SFHandle.sfh.SFH.interp_err">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">interp_err</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">ndarray</span><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">dtype</span><span class="p"><span class="pre">[</span></span><span class="pre">_ScalarType_co</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#SFHandle.sfh.SFH.interp_err" title="Link to this definition">#</a></dt>
+<dd><p>High-resolution interpolated error on the SFH amplitude <span class="math notranslate nohighlight">\({\rm M}_\odot~{\rm yr}^{-1}\)</span>.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="SFHandle.sfh.SFH.interp_lb_time">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">interp_lb_time</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">ndarray</span><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">dtype</span><span class="p"><span class="pre">[</span></span><span class="pre">_ScalarType_co</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#SFHandle.sfh.SFH.interp_lb_time" title="Link to this definition">#</a></dt>
+<dd><p>High-resolution time array in <span class="math notranslate nohighlight">\({\rm Myr}\)</span> used for SFH interpolation.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="SFHandle.sfh.SFH.interp_sfh">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">interp_sfh</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">ndarray</span><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">dtype</span><span class="p"><span class="pre">[</span></span><span class="pre">_ScalarType_co</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#SFHandle.sfh.SFH.interp_sfh" title="Link to this definition">#</a></dt>
+<dd><p>High-resolution interpolated SFH in <span class="math notranslate nohighlight">\({\rm M}_\odot~{\rm yr}^{-1}\)</span>.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="SFHandle.sfh.SFH.interpolate_sfh">
+<span class="sig-name descname"><span class="pre">interpolate_sfh</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">lb_time</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kind</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'next'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bounds_error</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fill_value</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/SFHandle/sfh.html#SFH.interpolate_sfh"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#SFHandle.sfh.SFH.interpolate_sfh" title="Link to this definition">#</a></dt>
+<dd><p>Interpolate the SFH and its uncertainty on a new look-back time grid.</p>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>By default <code class="docutils literal notranslate"><span class="pre">kind</span></code> is equal to <code class="code highlight python docutils literal highlight-python"><span class="s1">&#39;next&#39;</span></code>. This is the correct interpolation type for non-parametric SFHs. Change this parameter only if you know what you are doing.</p>
+<p>For details regarding the parameters used for the interpolation, see <a class="reference external" href="https://docs.scipy.org/doc/scipy-1.16.0/reference/generated/scipy.interpolate.interp1d.html">interp1d</a>.</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>lb_time</strong> (<a class="reference external" href="https://numpy.org/devdocs/reference/typing.html#numpy.typing.ArrayLike">ArrayLike</a>) – Look-back time array in <span class="math notranslate nohighlight">\({\rm Myr}\)</span> onto which the SFH must be interpolated.</p></li>
+<li><p><strong>kind</strong> (<em>Literal</em><em>[</em><em>'linear'</em><em>, </em><em>'nearest'</em><em>, </em><em>'nearest-up'</em><em>, </em><em>'zero'</em><em>, </em><em>'slinear'</em><em>, </em><em>'quadratic'</em><em>, </em><em>'cubic'</em><em>, </em><em>'previous'</em><em>, </em><em>'next'</em><em>]</em>) – Type of interpolation.</p></li>
+<li><p><strong>bounds_error</strong> (<em>bool</em>) – Whether to throw an error if extrapolating or not.</p></li>
+<li><p><strong>fill_value</strong> (<em>float</em>) – Value used for extrapolation.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Interpolated SFH and interpolated error on SFH amplitude. Both are in <span class="math notranslate nohighlight">\({\rm M}_\odot~{\rm yr}^{-1}\)</span>.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>(<a class="reference external" href="https://numpy.org/devdocs/reference/typing.html#numpy.typing.NDArray">NDArray</a>, <a class="reference external" href="https://numpy.org/devdocs/reference/typing.html#numpy.typing.NDArray">NDArray</a>)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="SFHandle.sfh.SFH.lb_time">
+<span class="sig-name descname"><span class="pre">lb_time</span></span><a class="headerlink" href="#SFHandle.sfh.SFH.lb_time" title="Link to this definition">#</a></dt>
+<dd><p>Look-back time steps in <span class="math notranslate nohighlight">\({\rm Myr}\)</span> for the SFH</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="SFHandle.sfh.SFH.sfh">
+<span class="sig-name descname"><span class="pre">sfh</span></span><a class="headerlink" href="#SFHandle.sfh.SFH.sfh" title="Link to this definition">#</a></dt>
+<dd><p>Amplitude of the SFH at each time step in <span class="math notranslate nohighlight">\({\rm M}_\odot~{\rm yr}^{-1}\)</span></p>
+</dd></dl>
+
+</dd></dl>
+
 </section>
 
 
@@ -383,6 +472,28 @@
                 <dialog id="pst-secondary-sidebar-modal"></dialog>
                 <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
 
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#SFHandle.sfh.SFH"><code class="docutils literal notranslate"><span class="pre">SFH</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#SFHandle.sfh.SFH.err"><code class="docutils literal notranslate"><span class="pre">SFH.err</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#SFHandle.sfh.SFH.integral"><code class="docutils literal notranslate"><span class="pre">SFH.integral</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#SFHandle.sfh.SFH.interp_err"><code class="docutils literal notranslate"><span class="pre">SFH.interp_err</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#SFHandle.sfh.SFH.interp_lb_time"><code class="docutils literal notranslate"><span class="pre">SFH.interp_lb_time</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#SFHandle.sfh.SFH.interp_sfh"><code class="docutils literal notranslate"><span class="pre">SFH.interp_sfh</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#SFHandle.sfh.SFH.interpolate_sfh"><code class="docutils literal notranslate"><span class="pre">SFH.interpolate_sfh()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#SFHandle.sfh.SFH.lb_time"><code class="docutils literal notranslate"><span class="pre">SFH.lb_time</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#SFHandle.sfh.SFH.sfh"><code class="docutils literal notranslate"><span class="pre">SFH.sfh</span></code></a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
 
   <div class="sidebar-secondary-item">
   <div role="note" aria-label="source link">

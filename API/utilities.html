@@ -49,6 +49,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@jupyter-widgets/html-manager@^1.0.1/dist/embed-amd.js"></script>
     <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'API/utilities';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -341,8 +342,33 @@
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section id="utility-functions">
-<h1>Utility functions<a class="headerlink" href="#utility-functions" title="Link to this heading">#</a></h1>
+  <section id="module-SFHandle.utilities">
+<span id="utility-functions"></span><h1>Utility functions<a class="headerlink" href="#module-SFHandle.utilities" title="Link to this heading">#</a></h1>
+<p><em>Code author: Wilfried Mercier - LAM &lt;<a class="reference external" href="mailto:wilfried&#46;mercier&#37;&#52;&#48;lam&#46;fr">wilfried<span>&#46;</span>mercier<span>&#64;</span>lam<span>&#46;</span>fr</a>&gt;</em></p>
+<p>Set of utility functions related to SFHs.</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="SFHandle.utilities.cigale_sfh">
+<span class="sig-prename descclassname"><span class="pre">SFHandle.utilities.</span></span><span class="sig-name descname"><span class="pre">cigale_sfh</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">galaxy</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/SFHandle/utilities.html#cigale_sfh"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#SFHandle.utilities.cigale_sfh" title="Link to this definition">#</a></dt>
+<dd><p><em>Code author: Rafael Arango-Torro - LAM</em></p>
+<p>Reconstruct the SFH of a given galaxy.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>galaxy</strong> (<a class="reference external" href="https://docs.astropy.org/en/stable/api/astropy.table.Row.html">Row</a>) – Data table entry for a single galaxy.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p>Lookback time bins in <span class="math notranslate nohighlight">\(\rm Myr\)</span>.</p></li>
+<li><p>SFH amplitude per time bin in <span class="math notranslate nohighlight">\({\rm M}_\odot~{\rm yr}^{-1}\)</span>.</p></li>
+<li><p>Error on SFH amplitude per time bin in <span class="math notranslate nohighlight">\({\rm M}_\odot~{\rm yr}^{-1}\)</span>.</p></li>
+</ul>
+</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>(<a class="reference external" href="https://numpy.org/devdocs/reference/typing.html#numpy.typing.NDArray">NDArray</a>, <a class="reference external" href="https://numpy.org/devdocs/reference/typing.html#numpy.typing.NDArray">NDArray</a>, <a class="reference external" href="https://numpy.org/devdocs/reference/typing.html#numpy.typing.NDArray">NDArray</a>)</p>
+</dd>
+</dl>
+</dd></dl>
+
 </section>
 
 
@@ -383,6 +409,18 @@
                 <dialog id="pst-secondary-sidebar-modal"></dialog>
                 <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
 
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#SFHandle.utilities.cigale_sfh"><code class="docutils literal notranslate"><span class="pre">cigale_sfh()</span></code></a></li>
+</ul>
+  </nav></div>
 
   <div class="sidebar-secondary-item">
   <div role="note" aria-label="source link">
