@@ -21,7 +21,6 @@ jobs:
     - name: Install dependencies and add package to path
       run: |
         conda env update --file environment.yml --name base
-        ln -s . $HOME/miniconda/env/base/lib/python3.10 SFHandle
     - name: Lint with flake8
       run: |
         conda install flake8
