@@ -1,6 +1,0 @@
-name: base
-dependencies:
-  - numpy
-  - matplotlib
-  - scipy
-  - astropy
