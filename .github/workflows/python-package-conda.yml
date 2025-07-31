@@ -1,4 +1,4 @@
-name: Python Package using Conda
+name: Test and coverage
 
 on: [push]
 
@@ -18,9 +18,10 @@ jobs:
       run: |
         # $CONDA is an environment variable pointing to the root of the miniconda directory
         echo $CONDA/bin >> $GITHUB_PATH
-    - name: Install dependencies
+    - name: Install dependencies and add package to path
       run: |
         conda env update --file environment.yml --name base
+        ln -s . $HOME/miniconda/env/base/lib/python3.10 SFHandle
     - name: Lint with flake8
       run: |
         conda install flake8
