@@ -7,41 +7,71 @@ r'''
 Plotting utilities for SFHs.
 '''
 
-import matplotlib.pyplot as     plt
-from   matplotlib.axes   import Axes
+import matplotlib.pyplot as plt
 
 # Local imports
-from   sfh               import SFH
+from .sfh import SFH
 
 def plot_sfh(sfh : SFH) -> None:
+    r'''
+    Plot a SFH and its interpolated form if available.
 
-    plt.figure(figsize=(10, 5))
+    :param sfh: star formation history to show
+    :type sfh: :py:class:`~.SFH`
 
-    # Interpolated SFH
-    plt.step(
-        sfh.interp_lb_time,  # pyright: ignore[reportArgumentType]
-        sfh.interp_sfh,  # pyright: ignore[reportArgumentType]
-        color = 'firebrick', 
-        ls    = '--'
-    )
+    **Example**
 
-    plt.scatter(
-        sfh.interp_lb_time,  # pyright: ignore[reportArgumentType]
-        sfh.interp_sfh,   # pyright: ignore[reportArgumentType]
-        c      = 'firebrick', 
-        marker = 'x'
-    )
+    .. jupyter-execute::
 
-    plt.fill_between(
-        sfh.interp_lb_time, # pyright: ignore[reportArgumentType]
-        sfh.interp_sfh - sfh.interp_err, # type: ignore
-        sfh.interp_sfh + sfh.interp_err, # type: ignore
-        edgecolor = 'firebrick', 
-        facecolor = 'none',
-        hatch     = '/',
-        alpha     = 0.3,
-        step      = 'pre'
-    )
+        import numpy             as np
+        import matplotlib.pyplot as plt
+
+        from SFHandle import SFH
+        from SFHandle import plot_sfh
+        
+        lb_time   = [1, 10, 100, 1000]
+        amp       = [0, 1, 10, 1]
+        err       = [0, 0.5, 3, 1]
+
+        mysfh     = SFH(lb_time, amp, err)
+        
+        lb_interp = np.linspace(0, 1000, 1000)
+        mysfh.interpolate_sfh(lb_interp)
+        
+        _ = plot_sfh(mysfh)
+    '''
+
+    plt.figure(figsize=(10, 5), dpi=300)
+
+    if (sfh.interp_lb_time is not None and
+        sfh.interp_sfh     is not None and
+        sfh.interp_err     is not None):
+
+        # Interpolated SFH
+        plt.step(
+            sfh.interp_lb_time,  # pyright: ignore[reportArgumentType]
+            sfh.interp_sfh,  # pyright: ignore[reportArgumentType]
+            color = 'firebrick', 
+            ls    = '--'
+        )
+
+        plt.scatter(
+            sfh.interp_lb_time,  # pyright: ignore[reportArgumentType]
+            sfh.interp_sfh,   # pyright: ignore[reportArgumentType]
+            c      = 'firebrick', 
+            marker = 'x'
+        )
+
+        plt.fill_between(
+            sfh.interp_lb_time, # pyright: ignore[reportArgumentType]
+            sfh.interp_sfh - sfh.interp_err, # type: ignore
+            sfh.interp_sfh + sfh.interp_err, # type: ignore
+            edgecolor = 'firebrick', 
+            facecolor = 'none',
+            hatch     = '/',
+            alpha     = 0.3,
+            step      = 'pre'
+        )
 
     # Original SFH
     plt.step(sfh.lb_time, sfh.sfh, color='k', where='pre')
