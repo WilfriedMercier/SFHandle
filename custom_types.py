@@ -1,15 +1,12 @@
-from   typing import Literal
+from   typing import Literal, TypeAlias
 import numpy  as     np
 
-Interp_kind = Literal['linear', 
-                      'nearest',
-                      'nearest-up', 
-                      'zero', 
-                      'slinear', 
-                      'quadratic', 
-                      'cubic', 
-                      'previous', 
-                      'next'
-                     ]
+#: Allowed values for interpolation with `interp1d`_.
+Interp_kind: TypeAlias = Literal[
+    'linear', 'nearest', 'nearest-up', 
+    'zero', 'slinear', 'quadratic', 
+    'cubic', 'previous', 'next'
+]
 
-Numpy_float = np.float16 | np.float32 | np.float64 | np.float128
+#: All floating types handled by numpy
+Numpy_float: TypeAlias = np.float16 | np.float32 | np.float64 | np.float128

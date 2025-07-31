@@ -11,7 +11,7 @@ import numpy             as     np
 from   numpy.typing      import NDArray, ArrayLike
 from   scipy.interpolate import interp1d
 
-import custom_types      as     ctypes
+from   .custom_types     import Interp_kind, Numpy_float
 
 class SFH:
     r'''
@@ -73,7 +73,7 @@ class SFH:
         return self._interp_err
 
     @property
-    def integral(self) -> ctypes.Numpy_float: 
+    def integral(self) -> Numpy_float: 
         r'''Integral of the SFH in :math:`{\rm M}_\odot`.'''
         
         # Duration of each bin in Myr
@@ -87,9 +87,9 @@ class SFH:
 
     def interpolate_sfh(self, 
         lb_time      : ArrayLike,
-        kind         : ctypes.Interp_kind = 'next',
-        bounds_error : bool               = False,
-        fill_value   : float              = 0.0,
+        kind         : Interp_kind = 'next',
+        bounds_error : bool        = False,
+        fill_value   : float       = 0.0,
         **kwargs
     ) -> tuple[NDArray, NDArray]:
         r'''
@@ -104,7 +104,6 @@ class SFH:
         :param lb_time: Look-back time array in :math:`{\rm Myr}` onto which the SFH must be interpolated.
         :type lb_time: `ArrayLike`_
         :param kind: Type of interpolation.
-        :type kind: :python:class:`custom_types.Interp_kind`
         :param bool bounds_error: Whether to throw an error if extrapolating or not.
         :param float fill_value: Value used for extrapolation.
 

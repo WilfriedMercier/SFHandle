@@ -16,15 +16,15 @@ def cigale_sfh(galaxy : tab.Row):
 
     Reconstruct the SFH of a given galaxy.
 
-    :param galaxy: data table entry for a single galaxy
-    :type galaxy: astropy.table.Row
+    :param galaxy: Data table entry for a single galaxy.
+    :type galaxy: `Row`_
 
     :returns: 
-        - lookback time bins in Myr, 
-        - SFH amplitude per time bin in Msun/yr, 
-        - error of SFH amplitude per time bin in Msun/yr
+        - Lookback time bins in :math:`\rm Myr`.
+        - SFH amplitude per time bin in :math:`{\rm M}_\odot~{\rm yr}^{-1}`.
+        - Error on SFH amplitude per time bin in :math:`{\rm M}_\odot~{\rm yr}^{-1}`.
 
-    :rtype: (numpy.ndarray, numpy.ndarray, numpy.ndarray)
+    :rtype: (`NDArray`_, `NDArray`_, `NDArray`_)
     '''
     
     # define the SFH column names
