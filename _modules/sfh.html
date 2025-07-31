@@ -1,0 +1,580 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" data-theme="light">
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>sfh &#8212; SFHandle</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "light";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../_static/mycss.css?v=4c50a842" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+    <script src="../_static/documentation_options.js?v=2709fde1"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '_modules/sfh';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="light">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">SFHandle</p>
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../API/index.html">
+    API documentation
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/WilfriedMercier/SFHandle.git" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar hide-on-wide">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../API/index.html">
+    API documentation
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/WilfriedMercier/SFHandle.git" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="index.html" class="nav-link">Module code</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">sfh</span></li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <h1>Source code for sfh</h1><div class="highlight"><pre>
+<span></span><span class="ch">#!/usr/bin/env python3</span>
+<span class="c1"># -*- coding: utf-8 -*-</span>
+
+<span class="sa">r</span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">.. codeauthor:: Wilfried Mercier - LAM &lt;wilfried.mercier@lam.fr&gt;</span>
+
+<span class="sd">Main part of the module that defines a SFH object to be manipulated.</span>
+<span class="sd">&#39;&#39;&#39;</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w">             </span><span class="k">as</span><span class="w">     </span><span class="nn">np</span>
+<span class="kn">from</span><span class="w">   </span><span class="nn">numpy.typing</span><span class="w">      </span><span class="kn">import</span> <span class="n">NDArray</span><span class="p">,</span> <span class="n">ArrayLike</span>
+<span class="kn">from</span><span class="w">   </span><span class="nn">scipy.interpolate</span><span class="w"> </span><span class="kn">import</span> <span class="n">interp1d</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">custom_types</span><span class="w">      </span><span class="k">as</span><span class="w">     </span><span class="nn">ctypes</span>
+
+<div class="viewcode-block" id="SFH">
+<a class="viewcode-back" href="../API/sfh.html#sfh.SFH">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">SFH</span><span class="p">:</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    .. codeauthor:: Wilfried Mercier - LAM &lt;wilfried.mercier@lam.fr&gt;</span>
+
+<span class="sd">    Class representing a SFH from Cigale.</span>
+
+<span class="sd">    :param lb_time: Look-back time steps in :math:`{\rm Myr}` for the SFH.</span>
+<span class="sd">    :type lb_time: `ArrayLike`_</span>
+<span class="sd">    :param sfh: Amplitude of the SFH at each time step in :math:`{\rm M}_\odot~{\rm yr}^{-1}`.</span>
+<span class="sd">    :type sfh: `ArrayLike`_</span>
+<span class="sd">    :param err: Error on the amplitude of the SFH at each time step :math:`{\rm M}_\odot~{\rm yr}^{-1}`.</span>
+<span class="sd">    :type err: `ArrayLike`_</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> 
+        <span class="n">lb_time</span> <span class="p">:</span> <span class="n">ArrayLike</span><span class="p">,</span>
+        <span class="n">sfh</span>     <span class="p">:</span> <span class="n">ArrayLike</span><span class="p">,</span>
+        <span class="n">err</span>     <span class="p">:</span> <span class="n">ArrayLike</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+
+        <span class="c1">#: Look-back time steps in :math:`{\rm Myr}` for the SFH</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">lb_time</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">lb_time</span><span class="p">)</span>
+
+        <span class="c1">#: Amplitude of the SFH at each time step in :math:`{\rm M}_\odot~{\rm yr}^{-1}`</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">sfh</span>     <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">sfh</span><span class="p">)</span>
+
+        <span class="c1">#: Error on the amplitude of the SFH at each time step in :math:`{\rm M}_\odot~{\rm yr}^{-1}`</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">err</span>     <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">err</span><span class="p">)</span>
+
+        <span class="c1"># Interpolated values. They are set to an array when interpolate_sfh is called.</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_interp_lb_time</span> <span class="p">:</span> <span class="n">NDArray</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_interp_sfh</span>     <span class="p">:</span> <span class="n">NDArray</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_interp_err</span>     <span class="p">:</span> <span class="n">NDArray</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span>
+
+        <span class="k">return</span>
+    
+    <span class="c1">##########################</span>
+    <span class="c1">#       Properties       #</span>
+    <span class="c1">##########################</span>
+    
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">interp_lb_time</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">NDArray</span> <span class="o">|</span> <span class="kc">None</span><span class="p">:</span> 
+<span class="w">        </span><span class="sa">r</span><span class="sd">&#39;&#39;&#39;High-resolution time array in :math:`{\rm Myr}` used for SFH interpolation.&#39;&#39;&#39;</span>
+        
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_interp_lb_time</span>
+    
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">interp_sfh</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">NDArray</span> <span class="o">|</span> <span class="kc">None</span><span class="p">:</span> 
+<span class="w">        </span><span class="sa">r</span><span class="sd">&#39;&#39;&#39;High-resolution interpolated SFH in :math:`{\rm M}_\odot~{\rm yr}^{-1}`.&#39;&#39;&#39;</span>
+        
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_interp_sfh</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">interp_err</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">NDArray</span> <span class="o">|</span> <span class="kc">None</span><span class="p">:</span> 
+<span class="w">        </span><span class="sa">r</span><span class="sd">&#39;&#39;&#39;High-resolution interpolated error on the SFH amplitude :math:`{\rm M}_\odot~{\rm yr}^{-1}`.&#39;&#39;&#39;</span>
+        
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_interp_err</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">integral</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">Numpy_float</span><span class="p">:</span> 
+<span class="w">        </span><span class="sa">r</span><span class="sd">&#39;&#39;&#39;Integral of the SFH in :math:`{\rm M}_\odot`.&#39;&#39;&#39;</span>
+        
+        <span class="c1"># Duration of each bin in Myr</span>
+        <span class="n">tstep</span> <span class="o">=</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">lb_time</span><span class="p">[::</span><span class="o">-</span><span class="mi">1</span><span class="p">][:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">lb_time</span><span class="p">[::</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">:])</span>
+        
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">nansum</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">sfh</span><span class="p">[::</span><span class="o">-</span><span class="mi">1</span><span class="p">][:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="n">tstep</span><span class="p">)</span> <span class="o">*</span> <span class="mf">1e6</span>
+
+    <span class="c1">#################################</span>
+    <span class="c1">#            Methods            #</span>
+    <span class="c1">#################################</span>
+
+<div class="viewcode-block" id="SFH.interpolate_sfh">
+<a class="viewcode-back" href="../API/sfh.html#sfh.SFH.interpolate_sfh">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">interpolate_sfh</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> 
+        <span class="n">lb_time</span>      <span class="p">:</span> <span class="n">ArrayLike</span><span class="p">,</span>
+        <span class="n">kind</span>         <span class="p">:</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">Interp_kind</span> <span class="o">=</span> <span class="s1">&#39;next&#39;</span><span class="p">,</span>
+        <span class="n">bounds_error</span> <span class="p">:</span> <span class="nb">bool</span>               <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+        <span class="n">fill_value</span>   <span class="p">:</span> <span class="nb">float</span>              <span class="o">=</span> <span class="mf">0.0</span><span class="p">,</span>
+        <span class="o">**</span><span class="n">kwargs</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="n">NDArray</span><span class="p">,</span> <span class="n">NDArray</span><span class="p">]:</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Interpolate the SFH and its uncertainty on a new look-back time grid.</span>
+<span class="sd">        </span>
+<span class="sd">        .. important::</span>
+
+<span class="sd">            By default ``kind`` is equal to :python:`&#39;next&#39;`. This is the correct interpolation type for non-parametric SFHs. Change this parameter only if you know what you are doing.</span>
+
+<span class="sd">            For details regarding the parameters used for the interpolation, see `interp1d`_.</span>
+
+<span class="sd">        :param lb_time: Look-back time array in :math:`{\rm Myr}` onto which the SFH must be interpolated.</span>
+<span class="sd">        :type lb_time: `ArrayLike`_</span>
+<span class="sd">        :param kind: Type of interpolation.</span>
+<span class="sd">        :type kind: :py:`~.Interp_kind`</span>
+<span class="sd">        :param bool bounds_error: Whether to throw an error if extrapolating or not.</span>
+<span class="sd">        :param float fill_value: Value used for extrapolation.</span>
+
+<span class="sd">        :returns: Interpolated SFH and interpolated error on SFH amplitude. Both are in :math:`{\rm M}_\odot~{\rm yr}^{-1}`.</span>
+<span class="sd">        :rtype: (`NDArray`_, `NDArray`_)</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+
+        <span class="c1"># Store the high-resolution range of look-back time</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_interp_lb_time</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">lb_time</span><span class="p">)</span>
+
+        <span class="c1"># Interpolate SFH</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_interp_sfh</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_interpolate</span><span class="p">(</span>
+            <span class="n">lb_time</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">lb_time</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">sfh</span><span class="p">,</span>
+            <span class="n">kind</span>         <span class="o">=</span> <span class="n">kind</span><span class="p">,</span> 
+            <span class="n">bounds_error</span> <span class="o">=</span> <span class="n">bounds_error</span><span class="p">,</span> 
+            <span class="n">fill_value</span>   <span class="o">=</span> <span class="n">fill_value</span><span class="p">,</span>
+            <span class="o">**</span><span class="n">kwargs</span>
+        <span class="p">)</span>
+
+        <span class="c1"># Interpolate the error on the SFH</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_interp_err</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_interpolate</span><span class="p">(</span>
+            <span class="n">lb_time</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">lb_time</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">err</span><span class="p">,</span>
+            <span class="n">kind</span>         <span class="o">=</span> <span class="n">kind</span><span class="p">,</span> 
+            <span class="n">bounds_error</span> <span class="o">=</span> <span class="n">bounds_error</span><span class="p">,</span> 
+            <span class="n">fill_value</span>   <span class="o">=</span> <span class="n">fill_value</span><span class="p">,</span>
+            <span class="o">**</span><span class="n">kwargs</span>
+        <span class="p">)</span>
+
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">interp_sfh</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">interp_err</span> <span class="c1"># pyright: ignore[reportReturnType]</span></div>
+
+    
+    <span class="k">def</span><span class="w"> </span><span class="nf">integrated_sfh_at</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">lb_time</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+
+        <span class="c1"># Mask that selects time bins older than the look-back time</span>
+        <span class="n">mask</span>  <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">lb_time</span> <span class="o">&gt;=</span> <span class="n">lb_time</span>
+
+        <span class="c1"># If the look-back time is older than the galaxy, the mass is 0</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">np</span><span class="o">.</span><span class="n">any</span><span class="p">(</span><span class="n">mask</span><span class="p">):</span> <span class="k">return</span> <span class="mf">0.0</span>
+
+        <span class="c1"># Duration of each bin in Myr</span>
+        <span class="n">tstep</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">lb_time</span><span class="p">[</span><span class="n">mask</span><span class="p">][</span><span class="mi">1</span><span class="p">:]</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">lb_time</span><span class="p">[</span><span class="n">mask</span><span class="p">][:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+
+        <span class="c1"># If the look-back time value falls in between two bin edges,</span>
+        <span class="c1"># We need to compute the mass generated during that event</span>
+        <span class="n">tstep</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">lb_time</span><span class="p">[</span><span class="n">mask</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="n">lb_time</span><span class="p">,</span> <span class="n">tstep</span><span class="p">)</span>
+        
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">nansum</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">sfh</span><span class="p">[</span><span class="n">mask</span><span class="p">]</span> <span class="o">*</span> <span class="n">tstep</span><span class="p">)</span> <span class="o">*</span> <span class="mf">1e6</span>
+
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_interpolate</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span>
+        <span class="n">new_x</span>        <span class="p">:</span> <span class="n">ArrayLike</span><span class="p">,</span>
+        <span class="n">old_x</span>        <span class="p">:</span> <span class="n">ArrayLike</span><span class="p">,</span>
+        <span class="n">old_y</span>        <span class="p">:</span> <span class="n">ArrayLike</span><span class="p">,</span>
+        <span class="o">**</span><span class="n">kwargs</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">NDArray</span><span class="p">:</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Class method implementing a useful 1D interpolation using scipy.</span>
+<span class="sd">        </span>
+<span class="sd">        .. note:</span>
+
+<span class="sd">            Interpolation is done on a function of the kind :math:`y = f(x)` using `interp1d`_.</span>
+
+<span class="sd">        :param new_x: New array used for interpolation.</span>
+<span class="sd">        :type new_x: `ArrayLike`_</span>
+<span class="sd">        :param old_x: Old x array defining the function.</span>
+<span class="sd">        :type old_x: `ArrayLike`_</span>
+<span class="sd">        :param old_y: Old y array defining the function.</span>
+<span class="sd">        :type old_x: `ArrayLike`_</span>
+<span class="sd">        :param kwargs: Additional keyword arguments passed to `interp1d`_.</span>
+
+<span class="sd">        :returns: Interpolated function evaluated on `new_x`.</span>
+<span class="sd">        :rtype: `ArrayLike`_</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+
+        <span class="k">return</span> <span class="n">interp1d</span><span class="p">(</span><span class="n">old_x</span><span class="p">,</span> <span class="n">old_y</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)(</span><span class="n">new_x</span><span class="p">)</span></div>
+
+</pre></div>
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2025, Wilfried Mercier.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.3.7.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">
+  <!-- # L10n: Setting the PST URL as an argument as this does not need to be localized -->
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.16.1.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>
